@@ -133,3 +133,6 @@ dmypy.json
 
 # Static build files
 static/build/
+
+# Writeup
+writeup.md
