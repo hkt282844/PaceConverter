@@ -1,0 +1,34 @@
+<!--Index page for displaying main pace converter page-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post" action="/">
+    <label for="distance">Total Distance:</label>
+    <input type="text" id="distance" name="distance" value={{distance}}><br><br>
+    <label for="units">Units:</label>
+    <input type="text" id="units" name="units" value={{units}}><br><br>
+    <label for="hours">Hours:</label>
+    <input type="text" id="hours" name="hours" value={{hours}}><br><br>
+    <label for="minutes">Minutes:</label>
+    <input type="text" id="minutes" name="minutes" value={{minutes}}><br><br>
+    <label for="seconds">Seconds:</label>
+    <input type="text" id="seconds" name="seconds" value={{seconds}}><br><br>
+    <button type="submit" value="Submit">Submit</button>
+  </form>
+
+  <form method="post" action="/convert">
+    <button method="post" action="/convert" type="submit" value="Convert Units">Convert Units</button>
+  </form>
+
+  <a>
+    <br><text>{{ average_pace }}</text><br><br>
+  </a>
+
+  {% for split in splits %}
+    <a>
+      <text>{{ split }}</text><br>
+    </a>
+  {% endfor %}
+
+{% endblock %}
