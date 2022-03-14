@@ -130,3 +130,6 @@ dmypy.json
 
 # Mac
 .DS_Store
+
+# Static build files
+# static/build/
