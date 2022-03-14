@@ -132,4 +132,4 @@ dmypy.json
 .DS_Store
 
 # Static build files
-# static/build/
+static/build/
