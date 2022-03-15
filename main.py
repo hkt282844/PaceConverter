@@ -15,9 +15,9 @@ def index():
     hours = request.form['hours']
     minutes = request.form['minutes']
     seconds = request.form['seconds']
-    pace_converter.set_input(distance, hours, minutes, seconds, units)
-    average_pace = pace_converter.get_average_pace()
-    splits = pace_converter.get_splits()
+    long_distance_pace_converter.set_input(distance, hours, minutes, seconds, units)
+    average_pace = long_distance_pace_converter.get_average_pace()
+    splits = long_distance_pace_converter.get_splits()
     splits = splits.split('\n')
     return render_template('index.html', distance=distance, units=units, hours=hours, minutes=minutes,
                            seconds=seconds, average_pace=average_pace, splits=splits)
@@ -27,10 +27,10 @@ def index():
 @app.route("/convert", methods=['GET', 'POST'])
 def convert():
   if request.method == 'POST':
-    pace_converter.convert_units()
-    distance, hours, minutes, seconds, units = pace_converter.get_input()
-    average_pace = pace_converter.get_average_pace()
-    splits = pace_converter.get_splits()
+    long_distance_pace_converter.convert_units()
+    distance, hours, minutes, seconds, units = long_distance_pace_converter.get_input()
+    average_pace = long_distance_pace_converter.get_average_pace()
+    splits = long_distance_pace_converter.get_splits()
     splits = splits.split('\n')
     return render_template('index.html', distance=distance, units=units, hours=hours, minutes=minutes,
                            seconds=seconds, average_pace=average_pace, splits=splits)
@@ -48,8 +48,8 @@ def track():
     lane = request.form['lane']
 
     track_split_converter.set_input(distance, laps, minutes, seconds, units, lane)
-    track_pace = track_split_converter.get_track_pace()
-    splits = track_split_converter.get_track_splits()
+    track_pace = track_split_converter.get_average_pace()
+    splits = track_split_converter.get_splits()
     splits = splits.split('\n')
     return render_template('track.html', distance=distance, laps=laps, minutes=minutes, seconds=seconds,
                            units=units, lane=lane, track_pace=track_pace, splits=splits)

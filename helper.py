@@ -4,6 +4,9 @@ import re
 def get_seconds_to_minutes(seconds):
   return seconds / 60
 
+def get_hours_to_seconds(hours):
+  return get_minutes_to_seconds(get_hours_to_minutes(hours))
+
 def get_minutes_to_seconds(minutes):
   return minutes * 60
 
@@ -66,13 +69,10 @@ def add_total_time(minutes_to_add, seconds_to_add, total_hours, total_minutes, t
   total_seconds += seconds_to_add
   return roll_over_times(total_hours, total_minutes, total_seconds)
 
-def get_average_pace(hours, minutes, seconds, distance):
-  total_seconds = get_minutes_to_seconds(get_hours_to_minutes(hours)) + get_minutes_to_seconds(minutes) + seconds
+def get_average_pace_in_seconds(hours, minutes, seconds, distance):
+  total_seconds = get_hours_to_seconds(hours) + get_minutes_to_seconds(minutes) + seconds
   seconds_per_mile = total_seconds / distance
-  total_minutes = get_seconds_to_minutes(seconds_per_mile)
-  whole_minutes = math.floor(total_minutes)
-  seconds = get_minutes_to_seconds(total_minutes - whole_minutes)
-  return (whole_minutes, seconds)
+  return seconds_per_mile
 
 def get_units(units):
   units = units.lower()
