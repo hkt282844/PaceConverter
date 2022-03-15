@@ -1,4 +1,5 @@
 <!--Track page for displaying track pace converter page-->
+<!--TODO: Convert to React and make form dynamic - only show distance or laps depending on lane number-->
 
 {% extends 'base.html' %}
 
@@ -6,12 +7,17 @@
   <form method="post" action="/track">
     <label for="distance">Split Distance in Meters:</label>
     <input type="text" id="distance" name="distance" value={{distance}}><br><br>
+    <label for="or">or</label>
+    <label for="laps">Laps:</label>
+    <input type="text" id="laps" name="laps" value={{laps}}><br><br>
     <label for="minutes">Pace Minutes:</label>
     <input type="text" id="minutes" name="minutes" value={{minutes}}><br><br>
     <label for="seconds">Pace Seconds:</label>
     <input type="text" id="seconds" name="seconds" value={{seconds}}><br><br>
     <label for="units">Pace Units:</label>
     <input type="text" id="units" name="units" value={{units}}><br><br>
+    <label for="lane">Lane Number:</label>
+    <input type="text" id="lane" name="lane" value={{lane}}><br><br>
     <button type="submit" value="Submit">Submit</button>
   </form>
 

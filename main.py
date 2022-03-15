@@ -40,16 +40,18 @@ def convert():
 def track():
   if request.method == 'POST':
     distance = request.form['distance']
+    laps = request.form['laps']
     minutes = request.form['minutes']
     seconds = request.form['seconds']
     units = request.form['units']
+    lane = request.form['lane']
 
-    track_split_converter.set_input(distance, minutes, seconds, units)
+    track_split_converter.set_input(distance, laps, minutes, seconds, units, lane)
     track_pace = track_split_converter.get_track_pace()
     splits = track_split_converter.get_track_splits()
     splits = splits.split('\n')
-    return render_template('track.html', distance=distance, minutes=minutes,
-                           seconds=seconds, units=units, track_pace=track_pace, splits=splits)
+    return render_template('track.html', distance=distance, laps=laps, minutes=minutes, seconds=seconds,
+                           units=units, lane=lane, track_pace=track_pace, splits=splits)
 
   return render_template('track.html')
 
