@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
-from pace_converter import *
+from long_distance_pace_converter import *
+from track_split_converter import *
 
 app = Flask(__name__)
 
-pace_converter = PaceConverter()
+long_distance_pace_converter = LongDistancePaceConverter()
 track_split_converter = TrackSplitConverter()
 
 @app.route("/", methods=['GET', 'POST'])
