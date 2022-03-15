@@ -3,6 +3,15 @@
 
 {% extends 'base.html' %}
 
+{% block nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('index') }}">Splits</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="{{url_for('track')}}">Track Splits</a>
+  </li>
+{% endblock %}
+
 {% block content %}
   <form method="post" action="/track">
     <label for="distance">Split Distance in Meters:</label>
