@@ -21,6 +21,7 @@ class Splits extends React.Component {
     this.updateMinutes = this.updateMinutes.bind(this);
     this.updateSeconds = this.updateSeconds.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleConvert = this.handleConvert.bind(this);
   }
 
   updateDistance(event) {
@@ -70,7 +71,16 @@ class Splits extends React.Component {
     axios({
       method: 'post',
       url: '/splits',
-      data: this.state})
+      data: this.state
+    })
+  }
+
+  handleConvert() {
+    axios({
+      method: 'post',
+      url: '/convert',
+      data: this.state
+    })
   }
 
   render() {
@@ -108,11 +118,15 @@ class Splits extends React.Component {
 
             <input type="submit" value="Submit" className="SubmitButton" />
           </form>
+
+          <form onSubmit={this.handleConvert} action="/" method="get">
+            <input type="submit" value="Convert Units" className="SubmitButton" />
+          </form>
         </div>
 
         <div>
           <label>{this.state.average_pace}</label>
-          {this.state.splits.map( (item) => <li key={item}>{item}</li> )}
+          {this.state.splits.map( (item) => <div key={item}>{item}</div> )}
         </div>
 
       </div>

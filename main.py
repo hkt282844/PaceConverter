@@ -54,16 +54,16 @@ def splits():
 
 @app.route("/convert", methods=['GET', 'POST'])
 def convert():
-  if request.method == 'POST':
-    long_distance_pace_converter.convert_units()
-    distance, hours, minutes, seconds, units = long_distance_pace_converter.get_input()
-    average_pace = long_distance_pace_converter.get_average_pace()
-    splits = long_distance_pace_converter.get_splits()
-    splits = splits.split('\n')
-    return render_template('index.html', distance=distance, units=units, hours=hours, minutes=minutes,
-                           seconds=seconds, average_pace=average_pace, splits=splits)
+  long_distance_pace_converter.convert_units()
+  distance, hours, minutes, seconds, units = long_distance_pace_converter.get_input()
 
-  return render_template('index.html')
+  average_pace = long_distance_pace_converter.get_average_pace()
+  splits = long_distance_pace_converter.get_splits()
+  splits = splits.split('\n')
+
+  data = {'distance':distance, 'hours':hours, 'minutes':minutes, 'seconds':seconds,
+          'units':units, 'average_pace':average_pace, 'splits':splits}
+  return data
 
 @app.route("/track", methods=['GET', 'POST'])
 def track():

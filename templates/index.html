@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" action="/">
+<!--   <form method="post" action="/">
     <label for="distance">Total Distance:</label>
     <input type="text" id="distance" name="distance" value={{distance}}><br><br>
     <label for="units">Units:</label>
@@ -24,18 +24,18 @@
     <label for="seconds">Seconds:</label>
     <input type="text" id="seconds" name="seconds" value={{seconds}}><br><br>
     <button type="submit" value="Submit">Submit</button>
-  </form>
+  </form> -->
 
-<!--   {% block app_content %}
+  {% block app_content %}
     <div id="react-root"></div>
     <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
-  {% endblock %} -->
+  {% endblock %}
 
-  <form method="post" action="/convert">
+<!--   <form method="post" action="/convert">
     <button method="post" action="/convert" type="submit" value="Convert Units">Convert Units</button>
-  </form>
+  </form> -->
 
-  <a>
+<!--   <a>
     <br><text>{{ average_pace }}</text><br><br>
   </a>
 
@@ -43,6 +43,6 @@
     <a>
       <text>{{ split }}</text><br>
     </a>
-  {% endfor %}
+  {% endfor %} -->
 
 {% endblock %}

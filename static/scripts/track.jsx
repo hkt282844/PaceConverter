@@ -124,7 +124,7 @@ class Track extends React.Component {
             <FormGroup>
               <FormLabel className="LaneNumberLabel">Lane Number:</FormLabel>
               <select value={this.state.lane} onChange={this.updateLane} className="LaneNumberDropDown">
-                <option disabled='true' value=''>Select</option>
+                <option disabled={true} value=''>Select</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
