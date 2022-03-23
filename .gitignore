@@ -131,8 +131,9 @@ dmypy.json
 # Mac
 .DS_Store
 
-# Static build files
+# Static files
 static/build/
+static/node_modules/
 
 # Writeup
 writeup.md

@@ -1,0 +1,37 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "React app",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack --mode production --progress --config webpack.config.js",
+    "dev-build": "./node_modules/.bin/webpack --progress -d --config webpack.config.js",
+    "watch": "./node_modules/.bin/webpack --mode development --progress --config webpack.config.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hkt282844/PaceConverter.git"
+  },
+  "author": "Hannah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hkt282844/PaceConverter/issues"
+  },
+  "homepage": "https://github.com/hkt282844/PaceConverter#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.2.1",
+    "react-dom": "^17.0.2"
+  }
+}

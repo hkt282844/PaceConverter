@@ -31,7 +31,7 @@ def get_str_to_int(string):
     value = float(string) if re.search(r'\.', string) else int(string)
   except:
     value = string
-  return value
+  return 0 if value == '' else value
 
 def get_int_to_str(number):
   return f'0{number}' if number < 10 else f'{number}'

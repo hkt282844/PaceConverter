@@ -4,9 +4,9 @@ class PaceConverterBaseClass:
   """
   Base class for other pace converter classes
   """
-  def __init__(self, distance=0, units='mi'):
-    self.distance = get_str_to_int(distance)
-    self.average_pace_units = get_units(units)
+  def __init__(self):
+    self.distance = ''
+    self.average_pace_units = 'miles'
 
   def assert_units(self, units):
     assert units == 'mi' or units == 'km' or units == 'm', 'Units must either be miles, kilometers, or meters!'

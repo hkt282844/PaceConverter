@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" action="/track">
+<!--   <form method="post" action="/track">
     <label for="distance">Split Distance in Meters:</label>
     <input type="text" id="distance" name="distance" value={{distance}}><br><br>
     <label for="or">or</label>
@@ -28,9 +28,14 @@
     <label for="lane">Lane Number:</label>
     <input type="text" id="lane" name="lane" value={{lane}}><br><br>
     <button type="submit" value="Submit">Submit</button>
-  </form>
+  </form> -->
 
-  <a>
+  {% block app_content %}
+    <div id="react-root"></div>
+    <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
+  {% endblock %}
+
+<!--   <a>
     <br><text>{{ track_pace }}</text><br><br>
   </a>
 
@@ -38,6 +43,6 @@
     <a>
       <text>{{ split }}</text><br>
     </a>
-  {% endfor %}
+  {% endfor %} -->
 
 {% endblock %}

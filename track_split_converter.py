@@ -5,50 +5,44 @@ class TrackSplitConverter(PaceConverterBaseClass):
   """
   Responsible for printing and converting running splits for track running
   """
-  def __init__(self, distance=0, laps=0, minutes=0, seconds=0, units='mi', lane=1):
-    super().__init__(distance, units)
-    self.laps = 0 if self.distance > 0 else get_str_to_int(laps)
-    self.avg_pace_mins = get_str_to_int(minutes)
-    self.avg_pace_secs = get_str_to_int(seconds)
-    self.lane_number = get_str_to_int(lane)
-    self.assert_input()
-
-  def assert_input(self):
-    number_inputs_map = {'Distance':self.distance, 'Laps':self.laps, 'Minutes':self.avg_pace_mins, 'Seconds':self.avg_pace_secs, 'Lane':self.lane_number}
-    for key, value in number_inputs_map.items():
-      assert_number(value, key)
-    self.assert_units(self.average_pace_units)
+  def __init__(self):
+    super().__init__()
+    self.laps = ''
+    self.avg_pace_mins = ''
+    self.avg_pace_secs = ''
+    self.lane_number = 1
 
   def get_input(self):
     return (self.distance, self.laps, self.avg_pace_mins, self.avg_pace_secs, self.average_pace_units, self.lane_number)
 
-  def set_input(self, distance=None, laps=None, minutes=None, seconds=None, units=None, lane=None):
-    if distance is not None and distance != '':
+  def set_input(self, minutes, seconds, units, lane, distance='', laps=''):
+    assert (distance != '') or (laps != ''), 'ERROR: distance and laps cannot both be empty!'
+
+    if distance != '':
       distance = get_str_to_int(distance)
       assert_number(distance, 'Distance')
       self.distance = distance
-    if laps is not None and laps != '' and self.distance == 0:
+
+    if laps != '' and self.distance == '':
       laps = get_str_to_int(laps)
       assert_number(laps, 'Laps')
       self.laps = laps
-    if minutes is not None:
-      minutes = get_str_to_int(minutes)
-      assert_number(minutes, 'Minutes')
-      self.avg_pace_mins = minutes
-    if seconds is not None:
-      seconds = get_str_to_int(seconds)
-      assert_number(seconds, 'Seconds')
-      self.avg_pace_secs = seconds
-    if units is not None:
-      units = get_units(units)
-      self.assert_units(units)
-      self.average_pace_units = units
-    if lane == '':
-      lane = 1
-    if lane is not None:
-      lane = get_str_to_int(lane)
-      assert_number(lane, 'Lane')
-      self.lane_number = lane
+
+    minutes = get_str_to_int(minutes)
+    assert_number(minutes, 'Minutes')
+    self.avg_pace_mins = minutes
+
+    seconds = get_str_to_int(seconds)
+    assert_number(seconds, 'Seconds')
+    self.avg_pace_secs = seconds
+
+    units = get_units(units)
+    self.assert_units(units)
+    self.average_pace_units = units
+
+    lane = 1 if lane == '' else get_str_to_int(lane)
+    assert_number(lane, 'Lane')
+    self.lane_number = lane
 
   def convert_units(self):
     if self.average_pace_units == 'm':
@@ -88,9 +82,14 @@ class TrackSplitConverter(PaceConverterBaseClass):
     return f'Splits:\n{output}'
 
   def get_splits(self):
-    return self.get_track_splits_per_lap() if self.lane_number > 1 else self.get_track_splits_per_meters()
+    if self.avg_pace_mins != '' and self.avg_pace_secs != '' and self.lane_number != '':
+      return self.get_track_splits_per_lap() if self.lane_number > 1 else self.get_track_splits_per_meters()
+    return ''
 
   def get_average_pace(self):
+    if self.avg_pace_mins == '' or self.avg_pace_secs == '' or self.lane_number == '':
+      return ''
+
     distance = self.distance if self.lane_number == 1 else get_lap_distance(self.lane_number) * self.laps
     total_converted_secs = self.convert_pace(distance)
     converted_hours, converted_minutes, converted_seconds = roll_over_times(0, 0, round(total_converted_secs))
