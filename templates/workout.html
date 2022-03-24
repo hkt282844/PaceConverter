@@ -1,0 +1,21 @@
+<!--Workout page for displaying single workout from training schedule-->
+
+{% extends 'base.html' %}
+
+{% block nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('index') }}">Splits</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url_for('track')}}">Track Splits</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="{{url_for('schedule')}}">Schedule</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+  <h2>{% block title %} {{ workout['day'] }} {% endblock %}</h2>
+  <span class="badge badge-primary">{{ workout['created'] }}</span>
+  <p>{{ workout['plan'] }}</p>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!--Schedule page for displaying training schedule-->
+
+{% extends 'base.html' %}
+
+{% block nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('index') }}">Splits</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url_for('track')}}">Track Splits</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link" href="{{url_for('schedule')}}">Schedule</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+
+  {% for workout in schedule %}
+    <h2>{{ workout['day'] }}</h2>
+    <p>{{ workout['plan'] }}</p>
+<!--     <p>{{ workout['sleep'] }}</p>
+    <p>{{ workout['actual'] }}</p>
+    <p>{{ workout['notes'] }}</p> -->
+  {% endfor %}
+
+{% endblock %}

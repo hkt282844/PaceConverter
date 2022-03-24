@@ -137,3 +137,7 @@ static/node_modules/
 
 # Writeup
 writeup.md
+
+# Database
+init_db.py
+database.db

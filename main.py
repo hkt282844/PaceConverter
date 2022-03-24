@@ -1,6 +1,22 @@
+import sqlite3
 from flask import Flask, render_template, request, jsonify
+from werkzeug.exceptions import abort
 from long_distance_pace_converter import *
 from track_split_converter import *
+
+def get_db_connection():
+  connection = sqlite3.connect('database.db')
+  connection.row_factory = sqlite3.Row
+  return connection
+
+def get_workout(day):
+  connection = get_db_connection()
+  workout = connection.execute('SELECT * FROM schedule WHERE day = ?',
+                               (day,)).fetchone()
+  connection.close()
+  if workout is None:
+    abort(404)
+  return workout
 
 app = Flask(__name__)
 
@@ -118,6 +134,18 @@ def track_splits():
   data = {'distance':distance, 'laps':laps, 'minutes':minutes, 'seconds':seconds,
           'units':units, 'lane':lane, 'track_pace':track_pace, 'splits':splits}
   return data
+
+@app.route("/schedule", methods=['GET', 'POST'])
+def schedule():
+  connection = get_db_connection()
+  schedule = connection.execute('SELECT * FROM schedule').fetchall()
+  connection.close()
+  return render_template('schedule.html', schedule=schedule)
+
+@app.route('/schedule/<string:day>')
+def workout(day):
+  workout = get_workout(day)
+  return render_template('workout.html', workout=workout)
 
 if __name__ == "__main__":
   app.run(host="127.0.0.1", port=8080, debug=True)
